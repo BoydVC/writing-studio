@@ -31,7 +31,7 @@ def page():
         ff += f"@font-face{{font-family:'{spec[0]}';src:url(data:font/woff;base64,{font(spec)}) format('woff');font-weight:{spec[2]};font-style:{style};font-display:swap}}\n"
     rd = lambda n: open(os.path.join(W, n)).read().replace("</script", "<\\/script")
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Char's Writing Studio</title><meta name="description" content="Calm, offline writing practice: prompts, planner, live rule-based feedback, self-check rubric.">
+<title>Alex's Writing Studio</title><meta name="description" content="Calm, offline writing practice: prompts, planner, live rule-based feedback, self-check rubric.">
 <style>{ff}{open(os.path.join(W, 'style.css')).read()}</style></head><body><div id="app"></div>
 <script>{rd('content.js')}</script><script>{rd('metrics.js')}</script><script>{rd('app.js')}</script></body></html>"""
 
