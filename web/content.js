@@ -1,4 +1,4 @@
-/* Content for Char's Writing Studio. All prompts and sample drafts are ORIGINAL, written for this app (not copied from any test or book). */
+/* Content for Alex's Writing Studio. All prompts and sample drafts are ORIGINAL, written for this app (not copied from any test or book). */
 window.WS_CONTENT = {
 modes: {
   narrative: { name: 'Narrative', blurb: 'Tell a story, real or imagined, with a clear beginning, middle and end.', color: '#c8794a' },

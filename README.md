@@ -1,4 +1,4 @@
-# Char's Writing Studio
+# Alex's Writing Studio
 
 A calm, offline writing-practice app for an 8th grader: **pick a prompt → plan → write with live feedback → self-check**. Everything runs in the browser. There is no AI, no API and no account, and drafts stay on the device.
 

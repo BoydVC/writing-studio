@@ -27,12 +27,12 @@ function render() {
   document.body.classList.toggle('focus', !!S.focus && S.view === 'write');
   const d = cur();
   app.innerHTML = top(d) + `<main>${({ prompts: vPrompts, plan: vPlan, write: vWrite, check: vCheck })[S.view](d)}</main>` +
-    `<div class="foot">Char's Writing Studio · works offline · drafts stay on this device · feedback is rule-based (no AI) · prompts are original</div>`;
+    `<div class="foot">Alex's Writing Studio · works offline · drafts stay on this device · feedback is rule-based (no AI) · prompts are original</div>`;
   if (S.view === 'write') mountEditor(d);
 }
 function top(d) {
   const st = [['prompts', 'Prompt'], ['plan', 'Plan'], ['write', 'Write'], ['check', 'Self-check']];
-  return `<div class="top"><div class="leaf">✎</div><div class="logo">Char's Writing Studio<small>calm practice · plan, write, check</small></div>
+  return `<div class="top"><div class="leaf">✎</div><div class="logo">Alex's Writing Studio<small>calm practice · plan, write, check</small></div>
   <nav class="steps">${st.map(([k, n], i) => `<button data-view="${k}" class="${S.view === k ? 'on' : ''}"><b>${i + 1}</b>${n}</button>`).join('')}</nav><span class="sp"></span>
   <div class="draftsel">${S.drafts.length ? `<select id="dsel" aria-label="Current draft">${S.drafts.map(x => `<option value="${x.id}" ${x.id === S.cur ? 'selected' : ''}>${esc(x.title)} · ${M.words(x.text).length}w</option>`).join('')}</select>` : ''}
   <button class="btn" data-act="new">＋ New</button></div></div>`;
@@ -241,7 +241,7 @@ function ring(p) { const r = 60, c = 2 * Math.PI * r; return `<svg class="ring" 
 function download(name, mime, body) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([body], { type: mime })); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); }
 const slug = s => (s || 'draft').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'draft';
 function exportTxt(d) { const p = promptById(d.promptId); download(slug(d.title) + '.txt', 'text/plain', `${d.title}\n${C.modes[d.mode].name}${p ? ' · Prompt: ' + p.text : ''}\n${'-'.repeat(40)}\n\n${d.text}\n`); }
-function exportJson(list, name) { const R = list.map(d => ({ ...d, stats: (a => ({ words: a.readability.words, sentences: a.readability.sentences, fkgl: a.readability.fkgl, fre: a.readability.fre, varietyScore: a.variety.score, transitionFamilies: a.transitions.categoriesUsed.length }))(M.analyze(d.text, d.mode)) })); download(name, 'application/json', JSON.stringify({ app: "Char's Writing Studio", version: 1, exported: new Date().toISOString(), drafts: R }, null, 2)); }
+function exportJson(list, name) { const R = list.map(d => ({ ...d, stats: (a => ({ words: a.readability.words, sentences: a.readability.sentences, fkgl: a.readability.fkgl, fre: a.readability.fre, varietyScore: a.variety.score, transitionFamilies: a.transitions.categoriesUsed.length }))(M.analyze(d.text, d.mode)) })); download(name, 'application/json', JSON.stringify({ app: "Alex's Writing Studio", version: 1, exported: new Date().toISOString(), drafts: R }, null, 2)); }
 function importJson(file) {
   const r = new FileReader(); r.onload = () => { try { const j = JSON.parse(r.result); const list = (j.drafts || [j]).filter(x => x && typeof x.text === 'string' && C.modes[x.mode]); let n = 0;
     list.forEach(x => { const id = S.drafts.some(d => d.id === x.id) ? x.id + '-imp' + Date.now().toString(36) : (x.id || 'd' + Date.now().toString(36) + n); delete x.stats; S.drafts.unshift({ plan: {}, rubric: {}, goal: '', ...x, id }); n++; });
