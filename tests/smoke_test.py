@@ -1,4 +1,4 @@
-"""Smoke + unit tests for Alex's Writing Studio.  Run: python3 tests/smoke_test.py   (exit 1 on any failure)
+"""Smoke + unit tests for Riley's Writing Studio.  Run: python3 tests/smoke_test.py   (exit 1 on any failure)
 Each metric in web/metrics.js is checked against examples whose answers were worked out BY HAND (shown in comments),
 plus the published examples on Wikipedia's Flesch-Kincaid page."""
 import json, os, re, subprocess, sys, tempfile, urllib.request
@@ -27,7 +27,7 @@ SYL = {"cat":1,"the":1,"a":1,"make":1,"hope":1,"table":2,"little":2,"whale":1,"s
 "violin":3,"geography":4,"theory":3,"previous":3,"platypus":3,"australian":4,"seemingly":3,"hybrid":2,"mammal":2,"reptilian":4,"creature":2}
 got = run([["syllables", w] for w in SYL])
 for (w, n), g in zip(SYL.items(), got): check(g == n, f"syllables('{w}') = {g}, hand count {n}")
-check(run([["syllables", "1969"], ["syllables", "don't"], ["syllables", "Alex's"]]) == [1, 1, 1], "syllables: number token = 1, contraction, possessive")
+check(run([["syllables", "1969"], ["syllables", "don't"], ["syllables", "Ri's"]]) == [1, 1, 1], "syllables: number token = 1, contraction, possessive")
 
 # ---------------- readability
 r = run([["readability", "The cat sat on the mat."], ["flesch", 13, 1, 24], ["readability", "Go. See. Stop. Rest."],
@@ -120,7 +120,7 @@ check(os.path.exists(snap), "snapshot exists")
 html = open(snap).read() if os.path.exists(snap) else ""
 check(not re.search(r'<(script|link|img)[^>]+(src|href)=["\']https?://', html) and "@import" not in html, "snapshot loads nothing from the network")
 check(html.count("data:font/woff;base64,") == 5, "fonts inlined")
-PRIVATE = ["Millersville", "tutor", "Boyd", "Jordan", "HSPT score"]
+PRIVATE = ["Lakeside", "tutor", "Alex", "Sam", "HSPT score"]
 check(not any(w.lower() in re.sub(r"<style>.*?</style>", "", html, flags=re.S).lower() for w in PRIVATE), "no family/tutoring data in the app")
 def dom(q, size="1440,1000"):
     with tempfile.TemporaryDirectory() as prof:
@@ -138,7 +138,7 @@ d = dom("demo=check&mode=argumentative"); check(len(re.findall(r'data-rub="[a-z]
 
 try:
     body = urllib.request.urlopen("http://127.0.0.1:4257/healthz", timeout=3).read(); check(b'"ok"' in body, "server /healthz")
-    check(b"Alex's Writing Studio" in urllib.request.urlopen("http://127.0.0.1:4257/", timeout=5).read(), "server serves the app")
+    check(b"Riley's Writing Studio" in urllib.request.urlopen("http://127.0.0.1:4257/", timeout=5).read(), "server serves the app")
 except OSError:
     print("(server not running on 4257; skipped server checks)")
 

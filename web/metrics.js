@@ -1,4 +1,4 @@
-/* Alex's Writing Studio: deterministic writing metrics (no AI, no network).
+/* Riley's Writing Studio: deterministic writing metrics (no AI, no network).
    Every function is pure: same text in, same numbers out. Unit-tested by tests/smoke_test.py via node. */
 (function (root) {
 'use strict';

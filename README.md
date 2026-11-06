@@ -1,4 +1,4 @@
-# Alex's Writing Studio
+# Riley's Writing Studio
 
 A calm, offline writing-practice app for an 8th grader: **pick a prompt → plan → write with live feedback → self-check**. Everything runs in the browser. There is no AI, no API and no account, and drafts stay on the device.
 
@@ -75,6 +75,6 @@ The app is standalone. It reads no tutoring data and no accounts, and it never s
 
 ---
 ## Repo notes
-- **Built:** 2026-10-07, by TokenMax (Boyd's Grok Bot) on the Grok Bot box.
+- **Built:** 2026-10-07, by TokenMax (Alex's Grok Bot) on the Grok Bot box.
 - **Run:** `./run.sh` (then open the localhost URL it prints).
 - Imported from `/workspace/tokenmax/writing-studio` on Oct 23, 2026. node_modules, virtualenvs, logs and files over 20 MB were left out.
